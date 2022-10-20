@@ -34,11 +34,11 @@ async function run() {
       payload
     } = github.context;
 
-    console.log(ref)
-    console.log(eventName)
-    console.log(payload)
-    console.log(github.context)
-    console.log(github.event)
+    await exec.exec(`echo ${ref}`)
+    await exec.exec(`echo ${eventName}`)
+    await exec.exec(`echo ${payload}`)
+    await exec.exec(`echo ${github.contex}`)
+    await exec.exec(`echo ${github.even}`)
 
     const {
       pull_request
