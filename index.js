@@ -50,7 +50,7 @@ async function run() {
 
     const taskId = pr_title.match('BRAVO-[0-9]+')
 
-    if (!taskId && !taskId.length) {
+    if (!taskId) {
       throw new Error('Task ID not found in PR title.')
     }
 
