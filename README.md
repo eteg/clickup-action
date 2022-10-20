@@ -66,15 +66,44 @@ uses: eteg/clickup-action@v1
 This is a complete example of the action usage for development purposes.:
 
 ```yaml
-name: clickup-action-dev
-
+name: "clickup"
 on:
-  push:
-    branches: ["develop"]
+  pull_request:
+    branches:
+      - main
+      - develop
+    types: [closed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    env:
+      CLICKUP_PERSONAL_TOKEN: ${{ secrets.CLICKUP_PERSONAL_TOKEN }}
+
+    steps:
+      - name: Setup Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: "./yarn.lock"
+
+      - name: Setup ClickUp
+        uses: eteg/clickup-action@v1
+        with:
+          CLICKUP_TEAM_ID: 3097350
 
 ```
 
-> NOTE: You must setup env variables in Github Action Secrets
+> NOTE: You must setup env variable `CLICKUP_PERSONAL_TOKEN` in Github Action Secrets
 
 ## :envelope: Package for distribution
 
