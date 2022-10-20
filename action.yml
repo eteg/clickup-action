@@ -1,10 +1,9 @@
 name: clickup-action
 description: Github Action to change clickup task status based on branch.
 inputs:
-  CLICKUP_PERSONAL_TOKEN:
-    description: "Environment"
+  CLICKUP_TEAM_ID:
+    description: "ClickUp team id"
     required: true
-    default: "dev"
 runs:
   using: "node16"
   main: "dist/index.js"
