@@ -1,5 +1,5 @@
 # ClickUp Action
-Github Action to deploy Zendesk Apps using ZCLI.
+Github Action to change clickup task status based on branch.
 
 ## :clipboard: Table of contents
 

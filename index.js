@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const exec = require('@actions/exec');
+const fetch = require('node-fetch');
 
 // In future move this to a separate file
 const CLICKUP_API = 'https://api.clickup.com/api/v2'
@@ -14,7 +15,6 @@ const STATUS = Object.freeze({
 
 // In future move this to a separate file (e.g clickup api utils)
 async function changeTaskStatus(url, options, status) {
-  // eslint-disable-next-line no-undef
   const response = await fetch(url, {
     ...options,
     body: JSON.stringify({ status }

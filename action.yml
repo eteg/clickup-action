@@ -1,7 +1,7 @@
-name: zcli-action
-description: Github Action to deploy Zendesk Apps using ZCLI.
+name: clickup-action
+description: Github Action to change clickup task status based on branch.
 inputs:
-  env:
+  CLICKUP_PERSONAL_TOKEN:
     description: "Environment"
     required: true
     default: "dev"
