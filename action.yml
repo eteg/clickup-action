@@ -4,6 +4,9 @@ inputs:
   CLICKUP_TEAM_ID:
     description: "ClickUp team id"
     required: true
+  PR_TITLE:
+    description: "Pull request title"
+    default: ${{ github.event.pull_request.title }}
 runs:
   using: "node16"
   main: "dist/index.js"
