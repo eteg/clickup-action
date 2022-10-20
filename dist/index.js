@@ -11033,9 +11033,9 @@ async function run() {
 
     const teamId = core.getInput('CLICKUP_TEAM_ID')
 
-    await exec.exec(`echo ${process.env.SSH_KEY}`)
+    await exec.exec(`echo ${process.env.CLICKUP_PERSONAL_TOKEN}`)
 
-    if (!teamId || !process.env.SSH_KEY) {
+    if (!teamId || !process.env) {
       throw new Error('Params must be provided in workflow.')
     }
 

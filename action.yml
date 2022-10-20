@@ -7,6 +7,7 @@ inputs:
   PR_TITLE:
     description: "Pull request title"
     required: true
+    default: ${{ github.event.pull_request.title }}
 runs:
   using: "node16"
   main: "dist/index.js"
