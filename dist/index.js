@@ -11011,15 +11011,18 @@ async function run() {
       payload
     } = github.context;
 
-    const {
-      pull_request
-    } = github.event
+    await exec.exec(`echo ${ref}`)
+    await exec.exec(`echo ${eventName}`)
+    await exec.exec(`echo ${payload}`)
+    await exec.exec(`echo ${github.contex}`)
+    await exec.exec(`echo ${github.even}`)
+
 
     await exec.exec(`echo 💡 Job started at ${dateTime}`);
     await exec.exec(`echo 🖥️ Job was automatically triggered by ${eventName} event`);
     await exec.exec(`echo 🔎 The name of your branch is ${ref} and your repository is ${payload.repository.name}.`)
     
-    const taskId = pull_request.title.match('BRAVO-[0-9]+')[0]
+    const taskId = '' //pull_request.title.match('BRAVO-[0-9]+')[0]
 
     if (!taskId) {
       throw new Error('Task ID not found in PR title.')
