@@ -34,6 +34,12 @@ async function run() {
       payload
     } = github.context;
 
+    console.log(ref)
+    console.log(eventName)
+    console.log(payload)
+    console.log(github.context)
+    console.log(github.event)
+
     const {
       pull_request
     } = github.event
