@@ -7,18 +7,15 @@
     "lint": "eslint .",
     "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
     "test": "jest",
-    "all": "npm run lint && npm run prepare && npm run test"
+    "all": "yarn lint && yarn prepare && yarn test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eteg/zcli-action.git"
-  },
+  "repository": "git+https://github.com/eteg/zcli-action.git",
   "keywords": [
     "GitHub",
     "Actions",
     "JavaScript"
   ],
-  "author": "",
+  "author": "augustobritodev <augustobritodev@icloud.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/eteg/zcli-action/issues"
