@@ -11011,10 +11011,7 @@ async function run() {
       payload
     } = github.context;
 
-    await exec.exec(`echo ${JSON.parse(payload)}`)
-    await exec.exec(`echo ${JSON.parse(github.context)}`)
-    await exec.exec(`echo ${JSON.parse(github.event)}`)
-
+    await exec.exec(`echo 💡 Job started at ${payload.pull_request}`);
 
     await exec.exec(`echo 💡 Job started at ${dateTime}`);
     await exec.exec(`echo 🖥️ Job was automatically triggered by ${eventName} event`);
