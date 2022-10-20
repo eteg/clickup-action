@@ -48,9 +48,9 @@ async function run() {
       throw new Error(`No PR_TITLE was provided.`);
     }
 
-    const taskId = pr_title.match('BRAVO-[0-9]+')[0]
+    const taskId = pr_title.match('BRAVO-[0-9]+')
 
-    if (!taskId) {
+    if (!taskId && !taskId.length) {
       throw new Error('Task ID not found in PR title.')
     }
 
@@ -64,7 +64,7 @@ async function run() {
 
     //await exec.exec(`echo $SSH_KEY | base64 --decode > .env`)
 
-    const url = `${CLICKUP_API}/task/${taskId}?custom_task_ids=true&team_id=${teamId}`
+    const url = `${CLICKUP_API}/task/${taskId[0]}?custom_task_ids=true&team_id=${teamId}`
     const options = {
       method: 'PUT',
       headers: {
