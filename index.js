@@ -34,11 +34,9 @@ async function run() {
       payload
     } = github.context;
 
-    await exec.exec(`echo ${ref}`)
-    await exec.exec(`echo ${eventName}`)
-    await exec.exec(`echo ${payload}`)
-    await exec.exec(`echo ${github.contex}`)
-    await exec.exec(`echo ${github.even}`)
+    await exec.exec(`echo ${JSON.parse(payload)}`)
+    await exec.exec(`echo ${JSON.parse(github.context)}`)
+    await exec.exec(`echo ${JSON.parse(github.event)}`)
 
 
     await exec.exec(`echo 💡 Job started at ${dateTime}`);
@@ -70,10 +68,10 @@ async function run() {
       },
     }
 
-    if (ref === 'refs/heads/main') {
+    if (ref === 'main') {
       console.log(`🚀 Status changed to ${STATUS.DONE}`)
       await changeTaskStatus(url, options, STATUS.DONE)
-    } else if (ref === 'refs/heads/develop' ) {
+    } else if (ref === 'develop' ) {
       console.log(`🚀 Status changed to ${STATUS.READY_FOR_QA}`)
       await changeTaskStatus(url, options, STATUS.READY_FOR_QA)
     } else {
