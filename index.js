@@ -40,7 +40,11 @@ async function run() {
     await exec.exec(`echo 🖥️ Job was automatically triggered by ${eventName} event`);
     await exec.exec(`echo 🔎 The name of your branch is ${ref} and your repository is ${payload.repository.name}.`)
     
-    const taskId = core.getInput('PR_TITLE').match('BRAVO-[0-9]+')[0]
+    const pr_title = core.getInput('PR_TITLE')
+
+    await exec.exec(`echo 💡 Job started at ${pr_title}`);
+
+    const taskId = pr_title.match('BRAVO-[0-9]+')[0]
 
     if (!taskId) {
       throw new Error('Task ID not found in PR title.')
