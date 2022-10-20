@@ -11019,7 +11019,11 @@ async function run() {
     
     const pr_title = core.getInput('PR_TITLE')
 
-    await exec.exec(`echo 💡 Job started at ${pr_title}`);
+    await exec.exec(`echo ${pr_title}`);
+
+    if (!pr_title) {
+      throw new Error(`No PR_TITLE was provided.`);
+    }
 
     const taskId = pr_title.match('BRAVO-[0-9]+')[0]
 
