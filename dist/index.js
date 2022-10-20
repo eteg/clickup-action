@@ -10990,16 +10990,6 @@ const STATUS = Object.freeze({
 })
 
 
-// In future move this to a separate file (e.g clickup api utils)
-async function changeTaskStatus(url, options, status) {
-  const response = await fetch(url, {
-    ...options,
-    body: JSON.stringify({ status }
-    )
-  })
-  const responseData = await response.json();
-  return responseData
-}
 
 async function run() {
   try {
@@ -11019,8 +11009,6 @@ async function run() {
     
     const pr_title = core.getInput('PR_TITLE')
 
-    await exec.exec(`echo ${pr_title}`);
-
     if (!pr_title) {
       throw new Error(`No PR_TITLE was provided.`);
     }
@@ -11038,24 +11026,27 @@ async function run() {
     if (!teamId || !process.env) {
       throw new Error('Params must be provided in workflow.')
     }
-
-    //await exec.exec(`echo $SSH_KEY | base64 --decode > .env`)
-
     const url = `${CLICKUP_API}/task/${taskId[0]}?custom_task_ids=true&team_id=${teamId}`
     const options = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': process.env.SSH_KEY
+        'Authorization': process.env.CLICKUP_PERSONAL_TOKEN
       },
     }
 
     if (ref === 'main') {
       console.log(`🚀 Status changed to ${STATUS.DONE}`)
-      await changeTaskStatus(url, options, STATUS.DONE)
+      await fetch(url, {
+        ...options,
+        body: JSON.stringify({ status: STATUS.DONE })
+      })
     } else if (ref === 'develop' ) {
       console.log(`🚀 Status changed to ${STATUS.READY_FOR_QA}`)
-      await changeTaskStatus(url, options, STATUS.READY_FOR_QA)
+      await fetch(url, {
+        ...options,
+        body: JSON.stringify({ status: STATUS.READY_FOR_QA })
+      })
     } else {
       throw new Error('Branch not allowed.')
     }
